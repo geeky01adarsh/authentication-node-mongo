@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+</head>
+
+<body>
+
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email">
+  <br>
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+  <br>
+  <input type="submit" id="sign-in-btn" value="Login">
+
+
+  <script>
+    let signInSubmitButton = document.querySelector("#sign-in-btn");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    const BASE_URL = "http://localhost:5000";
+
+    signInSubmitButton.addEventListener("click", async () => {
+      let user = {
+        email: email.value,
+        password: password.value,
+      };
+
+      let request = await fetch(`${BASE_URL}/api/v1/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      let message = await request.text();
+
+      alert(message);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <!-- <form action="/signup" method="post"> -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="name">
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <input type="submit" id="sign-up-btn" value="Sign Up">
+    <!-- </form> -->
+    <script>
+        let signUpSubmitButton = document.querySelector("#sign-up-btn");
+        let name = document.getElementById("username");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+
+        const BASE_URL = "http://localhost:5000";
+
+        signUpSubmitButton.addEventListener("click", async () => {
+            let user = {
+                name: name.value,
+                email: email.value,
+                password: password.value,
+            };
+            console.log(user);
+            let request = await fetch(`${BASE_URL}/api/v1/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            });
+
+            let message = await request.text();
+
+            alert(message);
+        })
+    </script>
+</body>
+
+</html>
