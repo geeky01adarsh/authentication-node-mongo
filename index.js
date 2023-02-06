@@ -1,5 +1,13 @@
 import express from 'express';
 import auth_router from './routes/auth_routes.js'
+import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+mongoose.set("strictQuery", false);
+mongoose.connect(
+  `mongodb+srv://admin:${process.env.MONGODB_PASS}@cluster0.yf2kxjy.mongodb.net/?retryWrites=true&w=majority`
+).then(()=>console.log("Successfully connected to the database"));
 const app = express();
 const PORT = 5000;
 
